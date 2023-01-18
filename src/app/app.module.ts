@@ -25,8 +25,8 @@ import { UserGuard } from "./user/user.guard";
          , canActivate:[UserGuard]
       },
 
-      {path:'' ,redirectTo:'Login' , pathMatch:'full'},
-      {path:'**' ,redirectTo:'Login' , pathMatch:'full'}
+      {path:'' ,redirectTo:'User' , pathMatch:'full'},
+      {path:'**' ,redirectTo:'User' , pathMatch:'full'}
     ]),
    
        

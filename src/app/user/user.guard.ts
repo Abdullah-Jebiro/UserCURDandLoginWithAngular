@@ -14,9 +14,10 @@ export class UserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-  if (this.service.getToken()?.length) 
+  if (this.service.getToken()?.length) {
     return true;
-    
+  }
+  
   this.router.navigate(['/Login']);
   return false;
    

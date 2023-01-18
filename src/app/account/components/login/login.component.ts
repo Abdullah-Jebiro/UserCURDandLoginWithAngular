@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     if ( /*this.loginForm.valid*/ true) {
       this.service.login(this.loginForm.value).subscribe({
         next:result => {
-          this.service.setToken(result);
+          this.service.setToken(result.token);
           this.router.navigate(['./User']);
         },
         error:err=> {
