@@ -2,7 +2,7 @@
     
 
     <div class="btn btn-primary btn-create d-flex justify-content-between  align-items-center" [routerLink]="['./Create']">
-        <i class="fa-solid fa-user-plus"></i>
+        <img class="m-1" src="../../../../assets/user-plus-solid.svg">
     </div>
     <app-alert [message]="alert.message" [type]="alert.type"></app-alert>
     <div class="card ">
@@ -36,9 +36,9 @@
                                 <td class="link" [routerLink]="['./',user.id]" >{{user.first_name}} {{user.last_name}}</td>
                                 <td>{{user.email}}</td>
                                 <td> <img [src]="user.avatar" [alt]="user.first_name" [style.width.px]="50"> </td>
-                                <td>
-                                     <button class="btn btn-secondary mx-2 p-1" (click)="OnDelete(user.id)">Delete</button> 
-                                     <button class="btn btn-secondary p-1">Update</button> 
+                                <td>             
+                                 <img class="m-1" src="../../../../assets/user-xmark-solid.svg" (click)="OnDelete(user.id)" [style.width.px]="30" alt="delete">   
+                                 <img class="m-1" src="../../../../assets/user-pen-solid.svg" [routerLink]="['./Update',user.id]" [style.width.px]="30" alt="Update">   
                                 </td>
                             </tr>
 
