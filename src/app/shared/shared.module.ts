@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationComponent } from './pagination/components/pagination.component';
 import { AlertComponent } from './alert/components/alert.component';
-import { AlertType } from './alert/models/AlertType';
 
 
 @NgModule({
@@ -23,6 +22,7 @@ import { AlertType } from './alert/models/AlertType';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    
     PaginationComponent,
     AlertComponent,
    

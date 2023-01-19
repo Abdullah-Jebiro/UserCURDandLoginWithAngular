@@ -14,7 +14,7 @@ import { IUserForCreateRequest } from '../../models/IUserForCreateRequest';
 export class UserCreateComponent implements OnInit {
   
   createUserForm!:FormGroup;
-  alert = new alert(AlertType.none,'');
+  alert = new alert(AlertType.none,''); //This data object is for alert.component
   private subs = new SubSink();
 
   constructor(private service:UserService,

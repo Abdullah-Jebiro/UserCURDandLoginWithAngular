@@ -17,7 +17,7 @@ export class UserListComponent {
   title = 'User';
   
   Users!:IUserWithPage;
-  alert = new alert(AlertType.none,'');
+  alert = new alert(AlertType.none,''); //This data object is for alert.component
   private subs = new SubSink();
 
   constructor(private userService:UserService , private router: Router){}
@@ -29,13 +29,13 @@ export class UserListComponent {
     }});        
   }
   
-   // Unsubscribe when the component dies
+  // Unsubscribe when the component dies
   ngOnDestroy() {
    this.subs.unsubscribe();
   }
 
   onLogout(){
-   localStorage.removeItem('token');
+   this.userService.removeToken();
    this.router.navigate(['./Login']);
   }
 
@@ -49,7 +49,7 @@ export class UserListComponent {
       this.alert = new alert(AlertType.Warning,"an error occurred")
     }
   });
-  }
+ }
 
  
   onChangePage(numberPage: number) {
@@ -57,7 +57,8 @@ export class UserListComponent {
     this.subs.sink=this.userService.getUsers(numberPage).subscribe({
       next:data=>{
         this.Users=data
-      }});   
+      }
+    });   
   }
 
 }

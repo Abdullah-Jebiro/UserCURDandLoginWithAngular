@@ -13,14 +13,15 @@ export class UserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+  
+   // Only if the user is logged in and the token are saved in the localStorage
+      
   if (this.service.getToken()?.length) {
     return true;
   }
   
   this.router.navigate(['/Login']);
   return false;
-   
   }
   
 }

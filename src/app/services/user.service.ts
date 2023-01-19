@@ -31,6 +31,11 @@ export class UserService {
   getToken(){
     return localStorage.getItem('token')?.toString();
   }
+  
+  removeToken(){
+    localStorage.removeItem('token');
+  }
+
 
 
   login(loginInfo:ILoginInfo):Observable<any>{

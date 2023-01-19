@@ -15,7 +15,9 @@ import { ActivatedRoute } from '@angular/router';
 export class UserUpdateComponent {
 
   updateUserForm!:FormGroup;
-  alert = new alert(AlertType.none,'');
+
+  alert = new alert(AlertType.none,''); //This data object is for alert.component
+
   private subs = new SubSink();
 
   constructor(private service:UserService,
@@ -23,15 +25,21 @@ export class UserUpdateComponent {
               private route:ActivatedRoute ) {}
 
   ngOnInit(): void {
+
     let id = Number(this.route.snapshot.paramMap.get('id'));
-     this.subs.sink=this.service.getUser(id).subscribe({
+
+    this.subs.sink=this.service.getUser(id).subscribe({
        next:date=>{
-        console.log(date);
          this.updateUserForm.setValue({
           name:date.first_name,
           job:date.last_name
-        })}}
-      ); 
+        })},
+        //If there is an error in the user number or an error occurs, an alert will appear with a message explaining the error
+        error:err=> {
+          this.alert = new alert(AlertType.Warning,err)
+        }
+      }); 
+
 
     this.updateUserForm = this.fb.group({
       name:['',Validators.required],
@@ -40,7 +48,9 @@ export class UserUpdateComponent {
 
   }
   onSubmit():void{
+
      //This function only works when the from is valid  
+
       let user:IUserForCreateRequest =this.updateUserForm.value;
       this.subs.sink=this.service.updateUser(user).subscribe({
         next:result => {

@@ -13,25 +13,24 @@ import { UserGuard } from "./user/user.guard";
     AppComponent
   ],
   imports: [
+
     BrowserModule,
     SharedModule,
     AccountModule,
-
 
     RouterModule.forRoot([
       {path:'User', loadChildren:()=>
          import('./user/user.module')
          .then( u => u.UserModule)
-         , canActivate:[UserGuard]
+         // Only if the user is logged in and the token are saved in the localStorage
+         , canActivate:[UserGuard]  
       },
 
       {path:'' ,redirectTo:'User' , pathMatch:'full'},
       {path:'**' ,redirectTo:'User' , pathMatch:'full'}
-    ]),
-   
-       
-          
+    ]),       
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

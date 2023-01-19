@@ -2,9 +2,10 @@
     <div class=" card mb-3 " style="max-width: 540px; " *ngIf="User">
         <div class="row g-0 ">
             <div class="col-md-4 ">
-                <img [src]="User.avatar " class="img-fluid  h-100 " alt="{{User.first_name}}">
+                <img [src]="User.avatar" class="img-fluid h-100" alt="{{User.first_name}}">
             </div>
             <div class="col-md-8 ">
+                
                 <div class="card-body ">
 
                     <p class="my-1"> <a href="mailto:{{User.email}}">
@@ -14,6 +15,7 @@
                     <p class="card-text m-1"> Last Name : {{User.last_name}}</p>
 
                 </div>
+
             </div>
         </div>
     </div>

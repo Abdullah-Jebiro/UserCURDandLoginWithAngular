@@ -8,21 +8,22 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
 
 @NgModule({
     declarations: [
+        
         UserListComponent,
         UserDetailComponent,
         UserCreateComponent,
         UserUpdateComponent,
     ],
     imports: [
+
         SharedModule,
         RouterModule.forChild([
+
             { path: '', component: UserListComponent },
-            { path: 'Create', component: UserCreateComponent },
-           
+            { path: 'Create', component: UserCreateComponent },   
             { path: 'Update/:id', component: UserUpdateComponent },
             { path: ':id', component: UserDetailComponent },
-        ]),
-        
+        ]),     
     ]
 })
 export class UserModule { }
