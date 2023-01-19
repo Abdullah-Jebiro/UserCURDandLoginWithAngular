@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { IUserWithPage } from 'src/app/user/models/IUserWithPage';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { IUser } from '../../models/IUser';
 
 @Component({
   selector: 'app-user-list',

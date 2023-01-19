@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { alert , AlertType } from 'src/app/shared/pagination/models/alter';
 import { IUserForCreateRequest } from '../../models/IUserForCreateRequest';
 
 @Component({
@@ -11,6 +12,7 @@ import { IUserForCreateRequest } from '../../models/IUserForCreateRequest';
 export class UserCreateComponent implements OnInit {
   
   createUserForm!:FormGroup;
+  alert = new alert(AlertType.none,'');
 
   constructor(private service:UserService) {}
 
@@ -25,12 +27,13 @@ export class UserCreateComponent implements OnInit {
       let user:IUserForCreateRequest =this.createUserForm.value;
       this.service.setUser(user).subscribe({
         next:result => {
-         
+          console.log(result);
+          this.alert = new alert(AlertType.Success,`The user ${result.name} was added successfully on ${result.createdAt.toString()}`)
         },
         error:err=> {
-         alert(err)
+          this.alert = new alert(AlertType.Warning,err)
         }
-      }); 
+      });
     }
   }
 }

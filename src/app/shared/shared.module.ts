@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationComponent } from './pagination/components/pagination.component';
-
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
   declarations: [
-    PaginationComponent, 
+    PaginationComponent,
+    AlertComponent, 
   ],
   imports: [
     CommonModule,
@@ -21,7 +22,9 @@ import { PaginationComponent } from './pagination/components/pagination.componen
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    PaginationComponent
+    PaginationComponent,
+    AlertComponent,
+   
   ]
 })
 export class SharedModule { }

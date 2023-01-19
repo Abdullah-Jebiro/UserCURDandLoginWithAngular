@@ -6,20 +6,19 @@ import { SharedModule } from '../shared/shared.module';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 
 @NgModule({
-  declarations: [
-    UserListComponent,
-    UserDetailComponent,
-    UserCreateComponent
-  ],
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      {path:'' , component:UserListComponent},
-      {path:'Create' , component:UserCreateComponent},
-      {path:':id' , component:UserDetailComponent},
-    
-      
-    ]),
-  ]
+    declarations: [
+        UserListComponent,
+        UserDetailComponent,
+        UserCreateComponent,
+    ],
+    imports: [
+        SharedModule,
+        RouterModule.forChild([
+            { path: '', component: UserListComponent },
+            { path: 'Create', component: UserCreateComponent },
+            { path: ':id', component: UserDetailComponent },
+        ]),
+        
+    ]
 })
 export class UserModule { }
