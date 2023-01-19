@@ -1,3 +1,5 @@
+import { AlertType } from "./AlertType";
+
 export class alert{
     public  type: string
     constructor(type:AlertType, public message: string ){
@@ -6,8 +8,3 @@ export class alert{
         setTimeout(() => this.type='none', 3000);
     }
 } 
-export enum AlertType {
-    none='none',
-    Success="Success",
-    Warning="warning",
-}

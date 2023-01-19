@@ -2,6 +2,7 @@
 
 .alert {
     position: fixed;
+    z-index: 99999;
     top: 30px;
     right: 20px;
     width: 400px;

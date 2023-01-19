@@ -12,14 +12,17 @@
 
                 <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
                     <div class="form-group my-4">
-                        <input id="name" placeholder="Name" class="form-control" formControlName="name" />
+                        <input placeholder="Name" class="form-control" formControlName="name" />
+                        <span *ngIf="createUserForm.get('name')?.errors?.['required'] && createUserForm.get('name')?.touched " class="px-2">Name this required</span>
                     </div>
 
                     <div class="form-group my-4">
-                        <input id="job" placeholder="Job" class="form-control" formControlName="job" />
+                        <input placeholder="Job" class="form-control" formControlName="job" />
+                        <span *ngIf="createUserForm.get('job')?.errors?.['required'] && createUserForm.get('job')?.touched " class="px-2">Job this required</span>
                     </div>
 
-                    <input type="submit" class="btn btn-primary w-100" value="Add" name="">
+                    <input [disabled]="this.createUserForm.invalid" type="submit" class="btn btn-primary w-100 " value="Add " name=" ">
+
                 </form>
 
             </div>

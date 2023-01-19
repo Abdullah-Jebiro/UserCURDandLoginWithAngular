@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-
+import { alert } from 'src/app/shared/alert/models/alert';
+import { AlertType } from 'src/app/shared/alert/models/AlertType';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-login',
@@ -13,28 +15,47 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
 
  loginForm!:FormGroup;
+ alert = new alert(AlertType.none,'');
+ 
+ private subs = new SubSink();
 
-  constructor(private service:UserService ,private router: Router) {}
+ ngOnDestroy() {
+   this.subs.unsubscribe();
+ }
+
+ 
+  constructor(private service:UserService 
+    , private router: Router 
+    ,private fb:FormBuilder) {}
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-    email:new FormControl(),
-    password:new FormControl(),});
+    this.loginForm = this.fb.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',Validators.required],});
   }
 
   onSubmit():void{
-    if ( /*this.loginForm.valid*/ true) {
-      this.service.login(this.loginForm.value).subscribe({
+       //This function only works when the from is valid
+       this.subs.sink=this.service.login(this.loginForm.value).subscribe({
         next:result => {
           this.service.setToken(result.token);
           this.router.navigate(['./User']);
         },
         error:err=> {
-         alert(err)
+          this.alert = new alert(AlertType.Warning,err)
+          this.loginForm.setValue({
+            email:'',
+            password:''
+          })
         }
       }); 
     }
+
+  ForgotPassword(){
+    this.loginForm.setValue({
+      email:'eve.holt@reqres.in',
+      password:'cityslicka'
+    })
   }
-
-
 }
+

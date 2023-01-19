@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationComponent } from './pagination/components/pagination.component';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './alert/components/alert.component';
 
 
 @NgModule({

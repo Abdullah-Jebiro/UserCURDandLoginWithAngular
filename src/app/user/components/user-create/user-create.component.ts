@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { alert , AlertType } from 'src/app/shared/pagination/models/alter';
+import { alert } from 'src/app/shared/alert/models/alert';
+import { AlertType } from 'src/app/shared/alert/models/AlertType';
+import { SubSink } from 'subsink';
 import { IUserForCreateRequest } from '../../models/IUserForCreateRequest';
 
 @Component({
@@ -13,19 +15,22 @@ export class UserCreateComponent implements OnInit {
   
   createUserForm!:FormGroup;
   alert = new alert(AlertType.none,'');
+  private subs = new SubSink();
 
-  constructor(private service:UserService) {}
+  constructor(private service:UserService,
+              private fb:FormBuilder) {}
 
   ngOnInit(): void {
-    this.createUserForm = new FormGroup({
-    name:new FormControl(),
-    job:new FormControl(),});
+    this.createUserForm = this.fb.group({
+      name:['',Validators.required],
+      job:['',Validators.required],
+    })
 
   }
   onSubmit():void{
-    if ( /*this.loginForm.valid*/ true) {
+     //This function only works when the from is valid  
       let user:IUserForCreateRequest =this.createUserForm.value;
-      this.service.setUser(user).subscribe({
+      this.subs.sink=this.service.setUser(user).subscribe({
         next:result => {
           console.log(result);
           this.alert = new alert(AlertType.Success,`The user ${result.name} was added successfully on ${result.createdAt.toString()}`)
@@ -35,5 +40,9 @@ export class UserCreateComponent implements OnInit {
         }
       });
     }
-  }
-}
+
+    ngOnDestroy() {
+      this.subs.unsubscribe();
+    }
+
+}  

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { IUserWithPage } from 'src/app/user/models/IUserWithPage';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { SubSink } from 'subsink';
+import { alert } from 'src/app/shared/alert/models/alert';
+import { AlertType } from 'src/app/shared/alert/models/AlertType';
 
 @Component({
   selector: 'app-user-list',
@@ -10,36 +12,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-list.component.css']
 })
 
+
 export class UserListComponent {
   title = 'User';
   
   Users!:IUserWithPage;
-  sub!:Subscription;
-
+  alert = new alert(AlertType.none,'');
+  private subs = new SubSink();
 
   constructor(private userService:UserService , private router: Router){}
  
   ngOnInit():void{
-    this.sub=this.userService.getUsers().subscribe({
+    this.subs.sink=this.userService.getUsers().subscribe({
       next:data=>{ 
         this.Users=data
-    }});   
-      
+    }});        
+  }
+  
+   // Unsubscribe when the component dies
+  ngOnDestroy() {
+   this.subs.unsubscribe();
   }
 
   onLogout(){
-  localStorage.removeItem('token');
-  this.router.navigate(['./Login']);
+   localStorage.removeItem('token');
+   this.router.navigate(['./Login']);
+  }
+
+  OnDelete(userId:number){
+  this.subs.sink=this.userService.deleteUser(userId).subscribe({
+    next:result => {
+      console.log(result);
+      this.alert = new alert(AlertType.Success,`The user has been deleted successfully`)
+    },
+    error:err=> {
+      this.alert = new alert(AlertType.Warning,"an error occurred")
+    }
+  });
   }
 
  
   onChangePage(numberPage: number) {
     // update current page of items
-    this.sub=this.userService.getUsers(numberPage).subscribe({
+    this.subs.sink=this.userService.getUsers(numberPage).subscribe({
       next:data=>{
         this.Users=data
       }});   
   }
-
 
 }

@@ -56,6 +56,7 @@ export class UserService {
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError))
   };
+  
 
   deleteUser(userId:Number):Observable<any>{
     return this.http.delete(this.userUrl).pipe(
