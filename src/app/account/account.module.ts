@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 
 
-
 @NgModule({
   declarations: [
     LoginComponent,
@@ -16,4 +15,5 @@ import { LoginComponent } from './components/login/login.component';
     ]),
   ]
 })
+
 export class AccountModule { }
