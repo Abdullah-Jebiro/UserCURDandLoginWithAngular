@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IUserWithPage } from 'src/app/user/models/IUserWithPage';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
@@ -13,11 +13,11 @@ import { AlertType } from 'src/app/shared/alert/models/AlertType';
 })
 
 
-export class UserListComponent {
+export class UserListComponent implements OnInit , OnDestroy{
   title = 'User';
-  
   Users!:IUserWithPage;
   alert = new alert(AlertType.none,''); //This data object is for alert.component
+
   private subs = new SubSink();
 
   constructor(private userService:UserService , private router: Router){}
