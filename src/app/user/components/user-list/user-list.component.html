@@ -55,7 +55,10 @@
     </div>
 
     <div class=" width w-100">
-        <app-pagination *ngIf="Users?.total_pages as total" class="d-flex justify-content-center" [totalPages]="total" (changePage)="onChangePage($event)"></app-pagination>
+        <app-pagination *ngIf="Users?.total_pages as total" 
+        class="d-flex justify-content-center" 
+        [totalPages]="total" (changePage)="onChangePage($event)">
+        </app-pagination>
     </div>
 
 </div>
