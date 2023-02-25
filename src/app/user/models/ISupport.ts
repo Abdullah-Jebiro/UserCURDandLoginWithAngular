@@ -1,4 +1,4 @@
-export interface ISupport{  
- url: string,
- text:string
+export interface ISupport {
+    url: string,
+    text: string
 }
