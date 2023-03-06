@@ -6,10 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './select-language.component.html',
   styleUrls: ['./select-language.component.css']
 })
+
 export class SelectLanguageComponent {
-  constructor(private translateService: TranslateService) {
-    this.changeLang();
-  }
+  constructor(private translateService: TranslateService) { }
 
   LangArray = [{ name: "English", value: "en" },
   { name: "Arabic", value: "ar" }]
@@ -26,4 +25,5 @@ export class SelectLanguageComponent {
     localStorage.setItem('Language', this.currentLanguage);
     this.translateService.use(this.LangArray.find(n => n.name == this.currentLanguage)?.value!);
   }
+
 }
